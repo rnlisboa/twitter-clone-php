@@ -13,8 +13,8 @@ class IndexController extends Action {
 		$this->render('index');
 	}
 
-	public function subscribe(){
-		$this->render('subscribe');
+	public function register(){
+		$this->render('register');
 	}
 
 }
