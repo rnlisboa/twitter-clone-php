@@ -39,6 +39,12 @@ class IndexController extends Action
 			$usuario->save();
 			$this->render('cadastro');
 		} else {
+
+			$this->view->usuario = Array(
+				'nome'=> $_POST['nome'],
+				'email'=> $_POST['email'],
+			);
+
 			$this->view->ErroCadastro = true;
 			$this->view->errorName = $response['errorName'];
 			$this->view->errorEmail = $response['errorEmail'];
