@@ -6,23 +6,19 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
-class IndexController extends Action
-{
+class IndexController extends Action{
 
-	public function index()
-	{
-
+	public function index(){
+		$this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
 		$this->render('index');
 	}
 
-	public function register()
-	{
+	public function register(){
 		$this->view->ErroCadastro = false;
 		$this->render('register');
 	}
 
-	public function registrar()
-	{
+	public function registrar(){
 		$usuario = Container::getModel('Usuario');
 		$usuario->__set('nome', $_POST['nome']);
 		$usuario->__set('email', $_POST['email']);
@@ -39,7 +35,6 @@ class IndexController extends Action
 			$usuario->save();
 			$this->render('cadastro');
 		} else {
-
 			$this->view->usuario = Array(
 				'nome'=> $_POST['nome'],
 				'email'=> $_POST['email'],

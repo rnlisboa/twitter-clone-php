@@ -17,10 +17,19 @@ class AuthController extends Action
         $retorno = $usuario->autenticar();
         
         if (!empty($retorno['id']) && !empty($retorno['nome'])) {
-            echo 'auth';
+            session_start();
+            $_SESSION['id'] = $retorno['id'];
+            $_SESSION['nome'] = $retorno['nome'];
+            header('Location: /timeline');
         } else {
             header('Location: /?login=erro');
         }
+    }
+
+    public function sair(){
+        session_start();
+        session_destroy();
+        header("Location: /");
     }
 }
 
