@@ -9,8 +9,14 @@ use MF\Model\Container;
 class IndexController extends Action{
 
 	public function index(){
-		$this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
-		$this->render('index');
+		$usuario_id = $_SESSION['id'];
+		if(!empty($usuario_id)){
+			$this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
+			$this->render('index');
+		} else{
+			header('Location: /timeline');
+		}
+		
 	}
 
 	public function register(){
