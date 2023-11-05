@@ -68,17 +68,17 @@ class Usuario extends Model{
     }
 
     public function autenticar(){
-        $query = 'select id, nome, email from usuario where email = :email and senha = :senha';
+        $query = 'select id, nome, email, senha from usuario where email = :email';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':email', $this->__get('email'));
-        $stmt->bindValue(':senha', $this->__get('senha'));
         $stmt->execute();
         
         $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if(!empty($usuario['id']) && !empty($usuario['nome'])){
             $this->__set('email', $usuario['id']);    
-            $this->__set('senha', $usuario['nome']);    
+            $this->__set('nome', $usuario['nome']);    
+            $this->__set('senha', $usuario['senha']);
         }
 
         return $usuario;

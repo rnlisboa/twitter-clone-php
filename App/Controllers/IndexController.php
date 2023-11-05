@@ -22,7 +22,8 @@ class IndexController extends Action{
 		$usuario = Container::getModel('Usuario');
 		$usuario->__set('nome', $_POST['nome']);
 		$usuario->__set('email', $_POST['email']);
-		$usuario->__set('senha', $_POST['senha']);
+		$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+		$usuario->__set('senha', $senha);
 		$qtd_usuario = count($usuario->getUsuarioPorEmail());
 		
 		if ($qtd_usuario > 0) {

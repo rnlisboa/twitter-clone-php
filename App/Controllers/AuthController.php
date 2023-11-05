@@ -12,11 +12,10 @@ class AuthController extends Action
 	public function autenticar() {
         $usuario = Container::getModel("usuario");
         $usuario->__set('email', $_POST['email']);
-        $usuario->__set('senha', $_POST['senha']);
-    
+        $senha = $_POST['senha'];
         $retorno = $usuario->autenticar();
-        
-        if (!empty($retorno['id']) && !empty($retorno['nome'])) {
+      
+        if (!empty($retorno) && password_verify($senha, $retorno['senha'])) {
             session_start();
             $_SESSION['id'] = $retorno['id'];
             $_SESSION['nome'] = $retorno['nome'];
